@@ -22,7 +22,7 @@ export default function Stack({resetKey}) {
             <div className="divider divider-primary text-primary">Operations</div>
 
             <div className = "my-4 flex items-center gap-4">
-                <TcButton text="Find Top" tc="O(1)" onClick={() => {
+                <TcButton color="primary" text="Find Top" tc="O(1)" onClick={() => {
                     if (!stack.length) setTopValue("Error");
                     else setTopValue(stack.at(-1)?.value);
                 }} />

@@ -3,9 +3,18 @@ import './App.css'
 
 import Stack from './components/Stack.jsx'
 
-export function TcButton({ text, tc, color = "primary", onClick, disabled = false }) {
+const btnColors = {
+    primary: "btn-primary",
+    secondary: "btn-secondary",
+    accent: "btn-accent",
+    success: "btn-success",
+    warning: "btn-warning",
+    error: "btn-error",
+};
+
+export function TcButton({ text, tc, color, onClick, disabled = false }) {
     return (
-        <button onClick={onClick} disabled={disabled} className={`btn btn-${color} relative flex flex-col items-center pb-3`}>
+        <button onClick={onClick} disabled={disabled} className={`btn ${btnColors[color]} relative flex flex-col items-center pb-3`}>
             <span className="text-base fw-bold">{text}</span>
             <span className="absolute bottom-1 text-[0.7em] font-mono">{tc}</span>
         </button>
