@@ -1,38 +1,56 @@
 import { useState } from 'react'
 import './App.css'
 
-function ModeView({ mode }) {
-    if (mode === 1) return <h2>Stack</h2>;
-    if (mode === 2) return <h2>Queue</h2>;
-    if (mode === 3) return <h2>Linked List</h2>;
-    return <h2>Loading...</h2>;
+import Stack from './components/Stack.jsx'
+
+export function TcButton({ text, tc, color = "primary", onClick, disabled = false }) {
+    return (
+        <button onClick={onClick} disabled={disabled} className={`btn btn-${color} relative flex flex-col items-center pb-3`}>
+            <span className="text-base fw-bold">{text}</span>
+            <span className="absolute bottom-1 text-[0.7em] font-mono">{tc}</span>
+        </button>
+    );
 }
 
-function App() {
+export default function App() {
     const [mode, setMode] = useState(0);
+    const [reset, setReset] = useState(false);
+
+    const renderDS = () => {
+        switch(mode) {
+            case 0: return <h2>Welcome!</h2>;
+            case 1: return <Stack resetKey={reset}/>;
+            // case 2: return <Queue />;
+            // case 3: return <Deque />;
+            default: return <h2>Work in progress...</h2>;
+        }
+    };
 
     return (
         <div>
             <div className="navbar bg-base-100 shadow-sm">
                 <div className="navbar-start">
-                    <a className="btn btn-ghost text-xl">DS Visualizer</a>
+                    <a onClick={() => {setMode(0)}} className="btn btn-ghost text-xl">
+                        <span className="text-primary font-bold">DS Visualizer</span>
+                        by Jason Sun
+                    </a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <select value={mode} onChange={(e) => setMode(Number(e.target.value))} className="select select-primary">
-                        <option value={0} disabled>Pick a data structure</option>
+                        <option value={0} disabled>Select a Data Structure</option>
                         <option value={1}>Stack</option>
                         <option value={2}>Queue</option>
-                        <option value={3}>Linked List</option>
+                        <option value={3}>Deque</option>
                     </select>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn btn-secondary">Reset</a>
+                    <a className="btn btn-secondary" onClick={() => setReset(prev => !prev)}>Reset</a>
                 </div>
             </div>
 
-            <ModeView mode={mode} />
+            <div>
+                {renderDS()}
+            </div>
         </div>
     )
 }
-
-export default App
