@@ -1,8 +1,20 @@
 import { useState } from 'react'
+import {motion, AnimatePresence, scale} from "framer-motion";
+
 import './App.css'
-
 import Stack from './components/Stack.jsx'
+import Queue from './components/Queue.jsx'
 
+// All color values correlating with the DaisyUI theme
+export const colors = {
+    primary: "#3abdf7",
+    secondary: "#727cdd",
+    success: "#2fd4bf",
+    error: "#fb7085",
+    white: "#e5e7eb"
+};
+
+// Classes have to have const input (for TcButton function)
 const btnColors = {
     primary: "btn-primary",
     secondary: "btn-secondary",
@@ -14,10 +26,17 @@ const btnColors = {
 
 export function TcButton({ text, tc, color, onClick, disabled = false }) {
     return (
-        <button onClick={onClick} disabled={disabled} className={`btn ${btnColors[color]} relative flex flex-col items-center pb-3`}>
+        <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            onClick={onClick}
+            disabled={disabled}
+            className={`btn ${btnColors[color]} relative flex flex-col items-center pb-3`}
+        >
             <span className="text-base fw-bold">{text}</span>
             <span className="absolute bottom-1 text-[0.7em] font-mono">{tc}</span>
-        </button>
+        </motion.button>
     );
 }
 
@@ -29,7 +48,7 @@ export default function App() {
         switch(mode) {
             case 0: return <h2>Welcome!</h2>;
             case 1: return <Stack resetKey={reset}/>;
-            // case 2: return <Queue />;
+            case 2: return <Queue resetKey={reset}/>;
             // case 3: return <Deque />;
             default: return <h2>Work in progress...</h2>;
         }
@@ -57,7 +76,7 @@ export default function App() {
                 </div>
             </div>
 
-            <div>
+            <div className="min-h-screen bg-base-300 px-7">
                 {renderDS()}
             </div>
         </div>

@@ -2,18 +2,18 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { v4 as uuid } from "uuid";
 
-import { TcButton, colors } from "../App.jsx";
+import { colors, TcButton } from "../App.jsx";
 
-export default function Stack({ resetKey }) {
-    const [stack, setStack] = useState([]);
+export default function Queue({ resetKey }) {
+    const [queue, setQueue] = useState([]);
     const [input, setInput] = useState("");
-    const [topValue, setTopValue] = useState("None");
+    const [frontValue, setFrontValue] = useState("None");
 
     // Reset current page
     useEffect(() => {
-        setStack([]);
+        setQueue([]);
         setInput("");
-        setTopValue("None");
+        setFrontValue("None");
     }, [resetKey]);
 
     return (
@@ -24,16 +24,16 @@ export default function Stack({ resetKey }) {
             <div className="my-4 flex items-center gap-4">
                 <TcButton
                     color="primary"
-                    text="Find Top"
+                    text="Find Front"
                     tc="O(1)"
                     onClick={() => {
-                        if (!stack.length) setTopValue("Error");
-                        else setTopValue(stack.at(-1)?.value);
+                        if (!queue.length) setFrontValue("Error");
+                        else setFrontValue(queue[0]?.value);
                     }}
                 />
                 <span className="ml-2">
-                    Top Element:
-                    <span className="badge badge-primary ml-2">{topValue}</span>
+                    Front Element:
+                    <span className="badge badge-primary ml-2">{frontValue}</span>
                 </span>
             </div>
 
@@ -52,7 +52,7 @@ export default function Stack({ resetKey }) {
                     tc="O(1)"
                     onClick={() => {
                         if (!input) return;
-                        setStack(prev => [...prev, { id: uuid(), value: input }]);
+                        setQueue(prev => [...prev, { id: uuid(), value: input }]);
                         setInput("");
                     }}
                 />
@@ -62,53 +62,71 @@ export default function Stack({ resetKey }) {
                     text="Pop"
                     tc="O(1)"
                     onClick={() => {
-                        setStack(prev => prev.slice(0, prev.length - 1));
+                        setQueue(prev => prev.slice(1));
                     }}
-                    disabled={stack.length === 0}
+                    disabled={queue.length === 0}
                 />
             </div>
 
             {/* Display */}
             <div className="divider divider-secondary text-secondary my-10">Visualization</div>
-            {stack.length === 0 && (
-                <h2 className="text-center pt-4 italic">The stack is empty</h2>
+            {queue.length === 0 && (
+                <h2 className="text-center pt-4 italic">The queue is empty</h2>
             )}
 
             <ul className="flex flex-col items-center gap-2">
                 <AnimatePresence>
-                    {stack.slice().reverse().map((item, index) => {
-                        const isTop = index === 0;
+                    {queue.map((item) => {
+                        const isFront = queue[0]?.id === item.id;
+                        const isBack = queue[queue.length - 1]?.id === item.id;
+
                         return (
                             <motion.li
                                 key={item.id}
                                 layout
-                                initial={{ opacity: 0, y: -10, borderColor: colors.white }}
+                                initial={{ opacity: 0, y: 10, borderColor: colors.white }}
                                 animate={{
                                     opacity: 1,
                                     y: 0,
-                                    borderColor: isTop ? colors.primary : colors.white,
+                                    borderColor: isFront || isBack ? colors.primary : colors.white,
                                 }}
                                 exit={{ opacity: 0, y: -10 }}
                                 transition={{ duration: 0.3 }}
                                 className="border rounded-lg p-3 text-center bg-base-200 shadow relative"
                             >
-                                {/* Top label */}
+                                {/* Front label */}
                                 <AnimatePresence>
-                                    {isTop && (
+                                    {isFront && (
                                         <motion.span
-                                            key="top"
+                                            key="front"
                                             initial={{ opacity: 0, y: -5 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0, y: -5 }}
                                             transition={{ duration: 0.3 }}
                                             className="absolute -top-5 left-1/2 -translate-x-1/2 text-xs text-primary"
                                         >
-                                            Top
+                                            Front
                                         </motion.span>
                                     )}
                                 </AnimatePresence>
 
                                 {item.value}
+
+                                {/* Back label */}
+                                <AnimatePresence>
+                                    {isBack && (
+                                        <motion.span
+                                            key="back"
+                                            initial={{ opacity: 0, y: 5 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: 5 }}
+                                            transition={{ duration: 0.3 }}
+                                            className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-xs text-primary"
+                                        >
+                                            Back
+                                        </motion.span>
+                                    )}
+                                </AnimatePresence>
                             </motion.li>
                         );
                     })}
