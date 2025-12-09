@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { v4 as uuid } from "uuid";
-
 import { TcButton, colors } from "../App.jsx";
 
 export default function Stack({ resetKey }) {
@@ -69,7 +68,10 @@ export default function Stack({ resetKey }) {
             </div>
 
             {/* Display */}
-            <div className="divider divider-secondary text-secondary my-10">Visualization</div>
+            <div className="divider divider-secondary text-secondary my-10">
+                Visualization
+            </div>
+
             {stack.length === 0 && (
                 <h2 className="text-center pt-4 italic">The stack is empty</h2>
             )}

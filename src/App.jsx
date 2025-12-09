@@ -4,6 +4,7 @@ import {motion, AnimatePresence, scale} from "framer-motion";
 import './App.css'
 import Stack from './components/Stack.jsx'
 import Queue from './components/Queue.jsx'
+import Deque from './components/Deque.jsx'
 
 // All color values correlating with the DaisyUI theme
 export const colors = {
@@ -27,9 +28,8 @@ const btnColors = {
 export function TcButton({ text, tc, color, onClick, disabled = false }) {
     return (
         <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            // whileHover={{ scale: 1.05 }} // Breaks DaisyUI btn press animation
+            // transition={{ type: "spring", stiffness: 200, damping: 20 }}
             onClick={onClick}
             disabled={disabled}
             className={`btn ${btnColors[color]} relative flex flex-col items-center pb-3`}
@@ -49,7 +49,7 @@ export default function App() {
             case 0: return <h2>Welcome!</h2>;
             case 1: return <Stack resetKey={reset}/>;
             case 2: return <Queue resetKey={reset}/>;
-            // case 3: return <Deque />;
+            case 3: return <Deque resetKey={reset}/>;
             default: return <h2>Work in progress...</h2>;
         }
     };
