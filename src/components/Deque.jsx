@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { v4 as uuid } from "uuid";
-import { colors, TcButton } from "../App.jsx";
+import {useState, useEffect} from "react";
+import {motion, AnimatePresence} from "framer-motion";
+import {v4 as uuid} from "uuid";
+import {colors, TcButton} from "../App.jsx";
 
-export default function Deque({ resetKey }) {
+export default function Deque({resetKey}) {
     const [deque, setDeque] = useState([]);
     const [input, setInput] = useState("");
     const [leftValue, setLeftValue] = useState("None");
@@ -21,13 +21,13 @@ export default function Deque({ resetKey }) {
         <div className="p-6">
             {/* Operations */}
             <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                initial={{opacity: 0, y: 10}}
+                animate={{opacity: 1, y: 0}}
+                transition={{duration: 0.5}}
             >
                 <div className="divider divider-primary text-primary">Operations</div>
 
-                <div className="my-4 flex items-center gap-6">
+                <div className="flex flex-wrap items-center gap-6 my-4">
                     {/* Find Left */}
                     <div className="flex items-center gap-2">
                         <TcButton
@@ -64,7 +64,7 @@ export default function Deque({ resetKey }) {
                 </div>
 
                 {/* Push and Pop */}
-                <div className="flex gap-2 mb-4">
+                <div className="flex flex-wrap gap-2 mb-4">
                     <input
                         type="text"
                         value={input}
@@ -79,7 +79,7 @@ export default function Deque({ resetKey }) {
                         tc="O(1)"
                         onClick={() => {
                             if (!input) return;
-                            setDeque(prev => [{ id: uuid(), value: input }, ...prev]);
+                            setDeque(prev => [{id: uuid(), value: input}, ...prev]);
                             setInput("");
                         }}
                     />
@@ -90,7 +90,7 @@ export default function Deque({ resetKey }) {
                         tc="O(1)"
                         onClick={() => {
                             if (!input) return;
-                            setDeque(prev => [...prev, { id: uuid(), value: input }]);
+                            setDeque(prev => [...prev, {id: uuid(), value: input}]);
                             setInput("");
                         }}
                     />
@@ -119,9 +119,9 @@ export default function Deque({ resetKey }) {
 
             {/* Display */}
             <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
+                initial={{opacity: 0, y: 10}}
+                animate={{opacity: 1, y: 0}}
+                transition={{delay: 0.2, duration: 0.5}}
             >
                 <div className="divider divider-secondary text-secondary my-10">
                     Visualization
@@ -141,15 +141,15 @@ export default function Deque({ resetKey }) {
                                 <motion.li
                                     key={item.id}
                                     layout
-                                    initial={{ opacity: 0, y: 10, borderColor: colors.white }}
+                                    initial={{opacity: 0, y: 10, borderColor: colors.white}}
                                     animate={{
                                         opacity: 1,
                                         y: 0,
                                         borderColor:
                                             isLeft || isRight ? colors.primary : colors.white,
                                     }}
-                                    exit={{ opacity: 0, y: -10 }}
-                                    transition={{ duration: 0.3 }}
+                                    exit={{opacity: 0, y: -10}}
+                                    transition={{duration: 0.3}}
                                     className="border rounded-lg p-3 text-center bg-base-200 shadow relative"
                                 >
                                     {/* Left label */}
@@ -157,10 +157,10 @@ export default function Deque({ resetKey }) {
                                         {isLeft && (
                                             <motion.span
                                                 key="left"
-                                                initial={{ opacity: 0, y: -5 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: -5 }}
-                                                transition={{ duration: 0.3 }}
+                                                initial={{opacity: 0, y: -5}}
+                                                animate={{opacity: 1, y: 0}}
+                                                exit={{opacity: 0, y: -5}}
+                                                transition={{duration: 0.3}}
                                                 className="absolute -top-5 left-1/2 -translate-x-1/2 text-xs text-primary"
                                             >
                                                 Left
@@ -175,10 +175,10 @@ export default function Deque({ resetKey }) {
                                         {isRight && (
                                             <motion.span
                                                 key="right"
-                                                initial={{ opacity: 0, y: 5 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: 5 }}
-                                                transition={{ duration: 0.3 }}
+                                                initial={{opacity: 0, y: 5}}
+                                                animate={{opacity: 1, y: 0}}
+                                                exit={{opacity: 0, y: 5}}
+                                                transition={{duration: 0.3}}
                                                 className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-xs text-primary"
                                             >
                                                 Right

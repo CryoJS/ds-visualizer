@@ -1,13 +1,13 @@
-import { motion } from "framer-motion";
+import {motion} from "framer-motion";
 
 export default function Home() {
     return (
         <div className="p-8 max-w-4xl mx-auto">
             {/* Intro */}
             <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                initial={{opacity: 0, y: 10}}
+                animate={{opacity: 1, y: 0}}
+                transition={{duration: 0.5}}
                 className="text-center my-16"
             >
                 <h1 className="text-5xl font-bold text-primary mb-4">
@@ -22,9 +22,9 @@ export default function Home() {
 
             {/* Functions */}
             <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.4 }}
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                transition={{delay: 0.2, duration: 0.4}}
                 className="my-12"
             >
                 <div className="divider text-primary">What You Can Do</div>
@@ -50,9 +50,9 @@ export default function Home() {
 
             {/* Usage */}
             <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.4 }}
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                transition={{delay: 0.4, duration: 0.4}}
                 className="my-16"
             >
                 <div className="divider text-primary">How It Works</div>
@@ -67,18 +67,19 @@ export default function Home() {
 
             {/* Footer / Author */}
             <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6, duration: 0.4 }}
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                transition={{delay: 0.6, duration: 0.4}}
                 className="text-center mt-20 opacity-70 text-sm"
             >
-                Built by <span className="font-semibold">Jason Sun</span> for learning, teaching, and mastering data structures.
+                Built by <span className="font-semibold">Jason Sun</span> for learning, teaching, and mastering data
+                structures.
             </motion.div>
         </div>
     );
 }
 
-function FeatureCard({ title, desc, icon }) {
+function FeatureCard({title, desc, icon}) {
     return (
         <div className="p-6 rounded-xl bg-base-200 shadow hover:shadow-lg transition">
             <div className="text-4xl mb-3">{icon}</div>

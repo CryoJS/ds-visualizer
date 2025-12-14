@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { v4 as uuid } from "uuid";
-import { colors, TcButton } from "../App.jsx";
+import {useState, useEffect} from "react";
+import {motion, AnimatePresence} from "framer-motion";
+import {v4 as uuid} from "uuid";
+import {colors, TcButton} from "../App.jsx";
 
-export default function Queue({ resetKey }) {
+export default function Queue({resetKey}) {
     const [queue, setQueue] = useState([]);
     const [input, setInput] = useState("");
     const [frontValue, setFrontValue] = useState("None");
@@ -19,13 +19,13 @@ export default function Queue({ resetKey }) {
         <div className="p-6">
             {/* Operations */}
             <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                initial={{opacity: 0, y: 10}}
+                animate={{opacity: 1, y: 0}}
+                transition={{duration: 0.5}}
             >
                 <div className="divider divider-primary text-primary">Operations</div>
 
-                <div className="my-4 flex items-center gap-4">
+                <div className="flex flex-wrap items-center gap-4 my-4">
                     <TcButton
                         color="primary"
                         text="Find Front"
@@ -41,7 +41,7 @@ export default function Queue({ resetKey }) {
                     </span>
                 </div>
 
-                <div className="flex gap-2 mb-4">
+                <div className="flex flex-wrap gap-2 mb-4">
                     <input
                         type="text"
                         value={input}
@@ -56,7 +56,7 @@ export default function Queue({ resetKey }) {
                         tc="O(1)"
                         onClick={() => {
                             if (!input) return;
-                            setQueue(prev => [...prev, { id: uuid(), value: input }]);
+                            setQueue(prev => [...prev, {id: uuid(), value: input}]);
                             setInput("");
                         }}
                     />
@@ -75,9 +75,9 @@ export default function Queue({ resetKey }) {
 
             {/* Display */}
             <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
+                initial={{opacity: 0, y: 10}}
+                animate={{opacity: 1, y: 0}}
+                transition={{delay: 0.2, duration: 0.5}}
             >
                 <div className="divider divider-secondary text-secondary my-10">
                     Visualization
@@ -97,14 +97,14 @@ export default function Queue({ resetKey }) {
                                 <motion.li
                                     key={item.id}
                                     layout
-                                    initial={{ opacity: 0, y: 10, borderColor: colors.white }}
+                                    initial={{opacity: 0, y: 10, borderColor: colors.white}}
                                     animate={{
                                         opacity: 1,
                                         y: 0,
                                         borderColor: isFront || isBack ? colors.primary : colors.white,
                                     }}
-                                    exit={{ opacity: 0, y: -10 }}
-                                    transition={{ duration: 0.3 }}
+                                    exit={{opacity: 0, y: -10}}
+                                    transition={{duration: 0.3}}
                                     className="border rounded-lg p-3 text-center bg-base-200 shadow relative"
                                 >
                                     {/* Front label */}
@@ -112,10 +112,10 @@ export default function Queue({ resetKey }) {
                                         {isFront && (
                                             <motion.span
                                                 key="front"
-                                                initial={{ opacity: 0, y: -5 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: -5 }}
-                                                transition={{ duration: 0.3 }}
+                                                initial={{opacity: 0, y: -5}}
+                                                animate={{opacity: 1, y: 0}}
+                                                exit={{opacity: 0, y: -5}}
+                                                transition={{duration: 0.3}}
                                                 className="absolute -top-5 left-1/2 -translate-x-1/2 text-xs text-primary"
                                             >
                                                 Front
@@ -130,10 +130,10 @@ export default function Queue({ resetKey }) {
                                         {isBack && (
                                             <motion.span
                                                 key="back"
-                                                initial={{ opacity: 0, y: 5 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: 5 }}
-                                                transition={{ duration: 0.3 }}
+                                                initial={{opacity: 0, y: 5}}
+                                                animate={{opacity: 1, y: 0}}
+                                                exit={{opacity: 0, y: 5}}
+                                                transition={{duration: 0.3}}
                                                 className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-xs text-primary"
                                             >
                                                 Back

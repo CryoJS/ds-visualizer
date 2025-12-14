@@ -33,7 +33,7 @@ export function TcButton({ text, tc, color, onClick, disabled = false }) {
             // transition={{ type: "spring", stiffness: 200, damping: 20 }}
             onClick={onClick}
             disabled={disabled}
-            className={`btn ${btnColors[color]} relative flex flex-col items-center pb-3`}
+            className={`btn ${btnColors[color]} relative flex flex-col flex-wrap items-center pb-3`}
         >
             <span className="text-base fw-bold">{text}</span>
             <span className="absolute bottom-1 text-[0.7em] font-mono">{tc}</span>
@@ -67,7 +67,7 @@ export default function App() {
                 </div>
                 <div className="navbar-center lg:flex">
                     <select value={mode} onChange={(e) => setMode(Number(e.target.value))} className="select select-primary">
-                        <option value={0} disabled>Select a Data Structure</option>
+                        <option value={0} disabled>Select</option>
                         <option value={1}>Stack</option>
                         <option value={2}>Queue</option>
                         <option value={3}>Deque</option>
