@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import {useState} from 'react'
 import {motion, AnimatePresence, scale} from "framer-motion";
 
 import './App.css'
@@ -26,7 +26,7 @@ const btnColors = {
     error: "btn-error",
 };
 
-export function TcButton({ text, tc, color, onClick, disabled = false }) {
+export function TcButton({text, tc, color, onClick, disabled = false}) {
     return (
         <motion.button
             // whileHover={{ scale: 1.05 }} // Breaks DaisyUI btn press animation
@@ -46,13 +46,18 @@ export default function App() {
     const [reset, setReset] = useState(false);
 
     const renderDS = () => {
-        switch(mode) {
-            case 0: return <Home/>;
-            case 1: return <Stack resetKey={reset}/>;
-            case 2: return <Queue resetKey={reset}/>;
-            case 3: return <Deque resetKey={reset}/>;
+        switch (mode) {
+            case 0:
+                return <Home/>;
+            case 1:
+                return <Stack resetKey={reset}/>;
+            case 2:
+                return <Queue resetKey={reset}/>;
+            case 3:
+                return <Deque resetKey={reset}/>;
             // case 4: return <??? resetKey={reset}/>;
-            default: return <h2>Work in progress...</h2>;
+            default:
+                return <h2>Work in progress...</h2>;
         }
     };
 
@@ -60,13 +65,16 @@ export default function App() {
         <div>
             <div className="navbar bg-base-100 shadow-sm">
                 <div className="navbar-start">
-                    <a onClick={() => {setMode(0)}} className="btn btn-ghost flex flex-col items-start text-xl">
+                    <a onClick={() => {
+                        setMode(0)
+                    }} className="btn btn-ghost flex flex-col items-start text-xl">
                         <span className="text-primary font-bold text-xl leading-tight">DS Visualizer</span>
                         <span className="text-[10px] opacity-70 -mt-2">by Jason Sun</span>
                     </a>
                 </div>
                 <div className="navbar-center lg:flex">
-                    <select value={mode} onChange={(e) => setMode(Number(e.target.value))} className="select select-primary">
+                    <select value={mode} onChange={(e) => setMode(Number(e.target.value))}
+                            className="select select-primary">
                         <option value={0} disabled>Select</option>
                         <option value={1}>Stack</option>
                         <option value={2}>Queue</option>
